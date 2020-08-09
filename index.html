@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <title>Circles</title>
+
+  <script>
+    var canvas = document.createElement('canvas');
+
+    function drawImageFromWebUrl(sourceurl){
+          var img = new Image();
+          img.src = sourceurl;
+
+          img.addEventListener("load", function () {
+              canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+              var pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
+              console.log(pixelData);
+          });
+    }
+
+    drawImageFromWebUrl("images/sean.jpg");
+
+  </script>
+
+</head>
+
+<html>
+<body>
+</body>
+</html>
