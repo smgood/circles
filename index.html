@@ -3,24 +3,33 @@
   <title>Circles</title>
 
   <script>
-    var canvas = document.createElement('canvas');
+    var imgCanvas = document.createElement('canvas');
+    var artCanvas = document.createElement('canvas');
+    document.body.appendChild(artCanvas);
 
     function drawImageFromWebUrl(sourceurl){
           var img = new Image();
           img.src = sourceurl;
 
           img.addEventListener("load", function () {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+            imgCanvas.width = artCanvas.width = img.width;
+            imgCanvas.height = artCanvas.height = img.height;
 
-            for (let i = 0; i < canvas.width; i++) {
-              for (let j = 0; j < canvas.height; j++) {
-                var pixelData = canvas.getContext('2d').getImageData(i, j, 1, 1).data;
+            imgCanvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, imgCanvas.width, imgCanvas.height);
+
+            var ctx = artCanvas.getContext("2d");
+
+            for (let i = 0; i < imgCanvas.width; i++) {
+              for (let j = 0; j < imgCanvas.height; j++) {
+                var pixelData = imgCanvas.getContext('2d').getImageData(i, j, 1, 1).data;
                 r = pixelData[0];
                 g = pixelData[1];
                 b = pixelData[2];
-                console.log("i: " + i + " j: " + j + " r: " + r + " g: " +  g + " b: " + b);
+
+                ctx.beginPath();
+                ctx.arc(i, j, 1, 0, 2 * Math.PI);
+                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                ctx.fill();
               }
             }
           });
