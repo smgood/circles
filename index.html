@@ -38,14 +38,14 @@
           (this.isGrowing && this.r >= this.finalRadius) ||
           (!this.isGrowing && this.r <= this.finalRadius)
         ) {
-          this.finalRadius = Math.random() * 100 + 1;
+          this.finalRadius = Math.random() * 95 + 5;
           this.isGrowing = this.r < this.finalRadius;
         }
 
         if (this.isGrowing) {
-          this.r ++;
+          this.r +=5;
         } else {
-          this.r --;
+          this.r -=5;
         }
       }
     }
@@ -54,7 +54,7 @@
       var circle = new Circle;
       circle.x = x;
       circle.y = y;
-      circle.r = Math.floor(Math.random() * 100) + 1;
+      circle.r = Math.floor(Math.random() * 96) + 5;
       circle.fill = fill;
       circles.push(circle);
     }
