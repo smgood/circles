@@ -3,15 +3,15 @@
   <title>Circles</title>
 
   <script>
-    var imgCanvas = document.createElement('canvas');
-    var artCanvas = document.createElement('canvas');
-    document.body.appendChild(artCanvas);
-
     function drawImageFromWebUrl(sourceurl){
           var img = new Image();
           img.src = sourceurl;
 
           img.addEventListener("load", function () {
+            var imgCanvas = document.createElement('canvas');
+            var artCanvas = document.createElement('canvas');
+            document.body.appendChild(artCanvas);
+          
             imgCanvas.width = artCanvas.width = img.width;
             imgCanvas.height = artCanvas.height = img.height;
 
