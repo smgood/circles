@@ -4,28 +4,63 @@
 
   <script>
     let circles = [];
+    var artCanvas = document.createElement('canvas');
+    var ctx = artCanvas.getContext("2d");
 
     function Circle() {
       this.x;
       this.y;
       this.r;
       this.fill;
+      this.finalRadius;
+      this.isGrowing;
 
       this.draw=function(ctx) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         ctx.fillStyle = this.fill;
         ctx.fill();
+
+        // 1. also check if finalradius is null
+        // 2. split into two function. call below stuff update()
+        if (
+          (this.isGrowing && this.r >= this.finalRadius) ||
+          (!this.isGrowing && this.r <= this.finalRadius)
+        ) {
+          this.finalRadius = Math.random() * 10;
+          this.isGrowing = this.finalRadius > this.r;
+        }
+
+        if (this.isGrowing) {
+          this.r += .1;
+        } else {
+          this.r -= .1;
+        }
       }
     }
 
     function addCircle(x, y, r, fill) {
+      let finalRadius = Math.random() * 10;
+      let isGrowing = finalRadius > r;
+
       var circle = new Circle;
       circle.x = x;
       circle.y = y;
       circle.r = r;
       circle.fill = fill;
+      circle.finalRadius = finalRadius;
+      circle.isGrowing = isGrowing;
       circles.push(circle);
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, artCanvas.width, artCanvas.height);
+
+      for (var i = 0; i < circles.length; i++) {
+        circles[i].draw(ctx);
+      }
+
+    	requestAnimationFrame( animate );
     }
 
     function drawImageFromWebUrl(sourceurl){
@@ -33,16 +68,15 @@
       img.src = sourceurl;
 
       img.addEventListener("load", function () {
-        var imgCanvas = document.createElement('canvas');
-        var artCanvas = document.createElement('canvas');
+        // 3. move this to separate window onload function
         document.body.appendChild(artCanvas);
+
+        var imgCanvas = document.createElement('canvas');
 
         imgCanvas.width = artCanvas.width = img.width;
         imgCanvas.height = artCanvas.height = img.height;
 
         imgCanvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, imgCanvas.width, imgCanvas.height);
-
-        var ctx = artCanvas.getContext("2d");
 
         for (let i = 0; i < imgCanvas.width; i++) {
           for (let j = 0; j < imgCanvas.height; j++) {
@@ -55,9 +89,7 @@
           }
         }
 
-        for (var i = 0; i < circles.length; i++) {
-          circles[i].draw(ctx);
-        }
+        animate();
       });
     }
 
