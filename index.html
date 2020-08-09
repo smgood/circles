@@ -11,7 +11,7 @@
 
           img.addEventListener("load", function () {
               canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-              var pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
+              var pixelData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
               console.log(pixelData);
           });
     }
