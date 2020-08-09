@@ -8,6 +8,7 @@
     var ctx = artCanvas.getContext("2d");
 
     // 4. set max size var
+    // 5. add slider for max var size
     function Circle() {
       this.x;
       this.y;
@@ -49,7 +50,7 @@
 
       // remove this
       let finalRadius = Math.random() * 10;
-      let isGrowing = finalRadius > r;
+      let isGrowing = finalRadius > this.r;
       circle.finalRadius = finalRadius;
       circle.isGrowing = isGrowing;
 
