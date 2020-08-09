@@ -7,6 +7,16 @@
     var artCanvas = document.createElement('canvas');
     var ctx = artCanvas.getContext("2d");
 
+    shuffleCircles() {
+      let result = [];
+      while (circles.length) {
+        let index = Math.floor(Math.random() * circles.length);
+        result.push(circles[index]);
+        circles.splice(index, 1);
+      }
+      circles = result;
+    }
+
     // 4. set max size var
     function Circle() {
       this.x;
@@ -87,11 +97,12 @@
           }
         }
 
+        shuffleCircles();
         animate();
       });
     }
 
-    drawImageFromWebUrl("images/sean.jpg", 20);
+    drawImageFromWebUrl("images/sean.jpg", 10);
 
   </script>
 
