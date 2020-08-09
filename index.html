@@ -28,7 +28,7 @@
           (this.isGrowing && this.r >= this.finalRadius) ||
           (!this.isGrowing && this.r <= this.finalRadius)
         ) {
-          this.finalRadius = Math.floor(Math.random() * 100)/10;
+          this.finalRadius = Math.random() * 10;
           this.isGrowing = this.finalRadius > this.r;
         }
 
@@ -48,7 +48,7 @@
       circle.fill = fill;
 
       // remove this
-      let finalRadius = Math.floor(Math.random() * 100)/10;
+      let finalRadius = Math.random() * 10;
       let isGrowing = finalRadius > this.r;
       circle.finalRadius = finalRadius;
       circle.isGrowing = isGrowing;
