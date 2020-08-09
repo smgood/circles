@@ -17,6 +17,8 @@
       this.isGrowing;
 
       this.draw=function(ctx) {
+        console.log(this.r);
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         ctx.fillStyle = this.fill;
