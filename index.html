@@ -10,9 +10,19 @@
           img.src = sourceurl;
 
           img.addEventListener("load", function () {
-              canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-              var pixelData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
-              console.log(pixelData);
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < canvas.width; i++) {
+              for (let j = 0; j < canvas.height; j++) {
+                var pixelData = canvas.getContext('2d').getImageData(i, j, 1, 1).data;
+                r = pixelData[0];
+                g = pixelData[1];
+                b = pixelData[2];
+                console.log("i: " + i + " j: " + j + " r: " + r + " g: " +  g + " b: " + b);
+              }
+            }
           });
     }
 
