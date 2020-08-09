@@ -40,17 +40,19 @@
       }
     }
 
-    function addCircle(x, y, r, fill) {
-      let finalRadius = Math.random() * 10;
-      let isGrowing = finalRadius > r;
-
+    function addCircle(x, y, fill) {
       var circle = new Circle;
       circle.x = x;
       circle.y = y;
-      circle.r = r;
+      circle.r = Math.random() * 10;
       circle.fill = fill;
+
+      // remove this
+      let finalRadius = Math.random() * 10;
+      let isGrowing = finalRadius > r;
       circle.finalRadius = finalRadius;
       circle.isGrowing = isGrowing;
+
       circles.push(circle);
     }
 
@@ -88,7 +90,7 @@
             let g = pixelData[1];
             let b = pixelData[2];
             let rgb = `rgb(${r}, ${g}, ${b})`;
-            addCircle (i*spacing, j*spacing, 1, rgb);
+            addCircle (i*spacing, j*spacing, rgb);
           }
         }
 
