@@ -44,12 +44,12 @@
       var circle = new Circle;
       circle.x = x;
       circle.y = y;
-      circle.r = Math.floor(Math.random() * 99 + 1)/10;
+      circle.r = Math.floor(Math.random() * 100 + 1)/10;
       circle.fill = fill;
 
       // remove this
       let finalRadius = Math.random() * 10;
-      let isGrowing = finalRadius > this.r;
+      let isGrowing = finalRadius > circle.r;
       circle.finalRadius = finalRadius;
       circle.isGrowing = isGrowing;
 
