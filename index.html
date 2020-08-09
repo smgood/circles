@@ -22,9 +22,9 @@
         ctx.fillStyle = this.fill;
         ctx.fill();
 
-        // 1. also check if finalradius is null
         // 2. split into two function. call below stuff update()
         if (
+          (this.finalRadius == null || this.isGrowing == null) ||
           (this.isGrowing && this.r >= this.finalRadius) ||
           (!this.isGrowing && this.r <= this.finalRadius)
         ) {
@@ -44,15 +44,8 @@
       var circle = new Circle;
       circle.x = x;
       circle.y = y;
-      circle.r = Math.floor(Math.random() * 100 + 1)/10;
+      circle.r = 1;
       circle.fill = fill;
-
-      // remove this
-      let finalRadius = Math.random() * 10;
-      let isGrowing = finalRadius > circle.r;
-      circle.finalRadius = finalRadius;
-      circle.isGrowing = isGrowing;
-
       circles.push(circle);
     }
 
