@@ -7,6 +7,7 @@
     var artCanvas = document.createElement('canvas');
     var ctx = artCanvas.getContext("2d");
 
+    // 4. set max size var
     function Circle() {
       this.x;
       this.y;
@@ -63,7 +64,8 @@
     	requestAnimationFrame( animate );
     }
 
-    function drawImageFromWebUrl(sourceurl){
+    function drawImageFromWebUrl(sourceurl, spacing){
+      var imgCanvas = document.createElement('canvas');
       var img = new Image();
       img.src = sourceurl;
 
@@ -71,10 +73,11 @@
         // 3. move this to separate window onload function
         document.body.appendChild(artCanvas);
 
-        var imgCanvas = document.createElement('canvas');
+        imgCanvas.width = img.width;
+        imgCanvas.height = img.height;
 
-        imgCanvas.width = artCanvas.width = img.width;
-        imgCanvas.height = artCanvas.height = img.height;
+        artCanvas.width = img.width * spacing;
+        artCanvas.height = img.height * spacing;
 
         imgCanvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, imgCanvas.width, imgCanvas.height);
 
@@ -85,7 +88,7 @@
             let g = pixelData[1];
             let b = pixelData[2];
             let rgb = `rgb(${r}, ${g}, ${b})`;
-            addCircle (i, j, 1, rgb);
+            addCircle (i*spacing, j*spacing, 1, rgb);
           }
         }
 
@@ -93,7 +96,7 @@
       });
     }
 
-    drawImageFromWebUrl("images/sean.jpg");
+    drawImageFromWebUrl("images/sean.jpg", 5);
 
   </script>
 
